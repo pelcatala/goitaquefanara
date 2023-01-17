@@ -1,0 +1,25 @@
+[
+    {
+        "id": 1,
+        "priority": 1,
+        "action": {
+            "type": "redirect",
+            "redirect": {
+                "transform": {
+                    "queryTransform": {
+                        "addOrReplaceParams": [
+                            {
+                                "key": "uxLocale",
+                                "value": "ca"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "condition": {
+            "urlFilter": "GetPlaybackResources",
+            "initiator": "https://www.primevideo.com/*"
+        }
+    }
+]
