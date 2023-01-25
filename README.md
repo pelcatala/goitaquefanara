@@ -27,6 +27,7 @@ Complement desenvolupat i mantingut per @pelcatala
 (https://twitter.com/pelcatala)
 
 ## 📦 Versió
+0.0.11 - Acció del popup eliminada.
 0.0.9 - Primera versió pública.
 
 ## 📜 Llicència
