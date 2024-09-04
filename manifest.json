@@ -1,7 +1,7 @@
 {
     "name": "Goita què fan ara",
     "manifest_version": 3,
-    "version": "0.0.11",
+    "version": "0.0.14",
     "description": "Extensió que indica el títols en català de Netflix i Prime Video.",
     "icons": {
         "16": "logo/logo-16.png",

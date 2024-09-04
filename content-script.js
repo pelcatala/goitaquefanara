@@ -45,20 +45,45 @@ function indicador() {
 }
 indicador();
 
+// Funció obtenir tots els enllaços dintre d'un element
+function obtenirEnllacos(element) {
+    const enllacos = element.querySelectorAll('a');
+    const enllacosArray = [];
+    enllacos.forEach((enllac) => {
+      enllacosArray.push(enllac.href);
+    });
+    return enllacosArray;
+}
+
 // Funció que afegeix al catàleg de Prime l'indicador de contingut en català
 function prime() {
 
     // Afegir menú
-    var menuprime = document.createElement("li")
-    menuprime.innerHTML = '<a href="https://goitaquefanara.cat/catalog?p=PRIME_VIDEO" target="_blank" id="pv-nav-mystuff" class="">Tot en català</a>';
-    if (document.getElementsByClassName("pv-navigation-bar").length>0) document.getElementsByClassName("pv-navigation-bar")[0].appendChild(menuprime);
+    setTimeout(function() {
+        // Selecciona l'element existent
+        var elementExistent = document.querySelector('li.SzkmN2.Q6SIsC[role="presentation"][style="--nav-list-child-index:4"]');
+    
+        // Crea el nou element
+        var nouElement = document.createElement('li');
+        nouElement.className = 'SzkmN2 Q6SIsC';
+        nouElement.setAttribute('role', 'presentation');
+        nouElement.setAttribute('style', '--nav-list-child-index:5');
+        nouElement.innerHTML = '<a aria-label="Tot en català" class="_6+KRio Zb6QDS" href="https://goitaquefanara.cat/catalog?p=PRIME_VIDEO" target="_blank"><span class="tvVqux">Tot en català</span></a>';
+    
+        // Insereix el nou element després de l'element existent
+        if (elementExistent && elementExistent.parentNode) {
+            elementExistent.parentNode.insertBefore(nouElement, elementExistent.nextSibling);
+        }
+    }, 1500); // Retard de 1,5 s
 
     // Posa l'indicador que toca
     function posa(objecte, icona) {
         if (objecte.classList.contains("tst-packshot")) {
             objecte.appendChild(icona.cloneNode(true));
-        } else {
+        } else if (objecte.closest(".av-hover-wrapper")) {
             objecte.closest(".av-hover-wrapper").appendChild(icona.cloneNode(true));
+        } else {
+            objecte.appendChild(icona.cloneNode(true));
         }
     }
 
@@ -74,15 +99,31 @@ function prime() {
             var voscjson = out.vosc;
             function busca() {
                 var tots = document.querySelectorAll(".tst-packshot, .av-grid-packshot")
-                for (let elem in tots) {
-                    if (tots[elem].childNodes?.length && !tots[elem].classList.contains("fet")) {
-                        try {
-                            const codi = tots[elem].childNodes[0].href.split('/')[4];
-                            if (vcvoscjson.includes(codi)) posa(tots[elem], vcvosc);
-                            else if (vcjson.includes(codi)) posa(tots[elem], vc);
-                            else if (voscjson.includes(codi)) posa(tots[elem], vosc);
-                        } catch { console.log(elem) }
-                        tots[elem].classList.add("fet");
+                if (tots.length!=0){
+                    for (let elem in tots) {
+                        if (tots[elem].childNodes?.length && !tots[elem].classList.contains("fet")) {
+                            try {
+                                const codi = tots[elem].childNodes[0].href.match(/[a-zA-Z0-9]{26}/)[0];
+                                if (vcvoscjson.includes(codi)) posa(tots[elem], vcvosc);
+                                else if (vcjson.includes(codi)) posa(tots[elem], vc);
+                                else if (voscjson.includes(codi)) posa(tots[elem], vosc);
+                            } catch { /*console.log(elem)*/ }
+                            tots[elem].classList.add("fet");
+                        }
+                    }
+                }
+                else {
+                    var tots2 = document.querySelectorAll('div[data-testid="packshot"], article[data-testid="standard-hero-card"], article[data-testid="super-carousel-card"]')
+                    for (let elem in tots2) {
+                        if (tots2[elem].childNodes?.length && !tots2[elem].classList.contains("fet")) {
+                            try {
+                                const codi = obtenirEnllacos(tots2[elem])[0].match(/[a-zA-Z0-9]{26}/)[0];
+                                if (vcvoscjson.includes(codi)) posa(tots2[elem], vcvosc);
+                                else if (vcjson.includes(codi)) posa(tots2[elem], vc);
+                                else if (voscjson.includes(codi)) posa(tots2[elem], vosc);
+                            } catch { /*console.log(elem)*/ }
+                            tots2[elem].classList.add("fet");
+                        }
                     }
                 }
             }
@@ -125,7 +166,7 @@ function netflix() {
                                 if (vcvoscjson.includes(codi)) posa(tots[elem], vcvosc);
                                 else if (vcjson.includes(codi)) posa(tots[elem], vc);
                                 else if (voscjson.includes(codi)) posa(tots[elem], vosc);
-                            } catch { console.log(elem) }
+                            } catch { /*console.log(elem)*/ }
                             tots[elem].classList.add("fet");
                         }
                     }

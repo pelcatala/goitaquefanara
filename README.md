@@ -27,8 +27,11 @@ Complement desenvolupat i mantingut per @pelcatala
 (https://twitter.com/pelcatala)
 
 ## 📦 Versió
-0.0.11 - Acció del popup eliminada.
-0.0.9 - Primera versió pública.
+- 0.0.14 - Suport per a la nova interfície de Prime.
+- 0.0.13 - Suport per a la nova interfície de Prime.
+- 0.0.12 - Solucionat un problema amb la detecció dels continguts de Prime.
+- 0.0.11 - Acció del popup eliminada.
+- 0.0.9 - Primera versió pública.
 
 ## 📜 Llicència
 [MIT](https://choosealicense.com/licenses/mit/)
